@@ -8,3 +8,9 @@ class BlockMoving : AbstractPieceMovingStrategy() {
                 .all { it.isEmpty() }
     }
 }
+
+class JustMoving : AbstractPieceMovingStrategy() {
+    override fun canMove(pieces: List<ChessPieceInGame>): Boolean {
+        return pieces.last().isEmpty()
+    }
+}
