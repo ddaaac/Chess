@@ -2,6 +2,8 @@ package com.example.demo.chess.domain.board
 
 import com.example.demo.chess.domain.board.ChessCol.*
 import com.example.demo.chess.domain.board.ChessRow.*
+import com.example.demo.chess.domain.board.path.ChessPath
+import com.example.demo.chess.domain.board.path.emptyPath
 import com.example.demo.chess.domain.piece.move.PieceDirection
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,7 +14,7 @@ internal class ChessPositionTest {
 
     @ParameterizedTest
     @MethodSource("generatePath")
-    fun `시작 좌표에서 목표 좌표까지의 경로를 구한다`(start: ChessPosition, end: ChessPosition, direction: PieceDirection, expectedPath: ChessPath) {
+    fun `시작 좌표에서 목표 좌표까지의 경로를 구한다`(start: ChessPosition, end: ChessPosition, direction: PieceDirection, expectedPath: ChessPath?) {
         val result = start.getPathTo(end, direction)
         assertThat(result).usingRecursiveComparison()
                 .isEqualTo(expectedPath)
@@ -48,9 +50,9 @@ internal class ChessPositionTest {
                         ChessPosition.get(D, TWO),
                         ChessPosition.get(D, ONE),
                 ))),
-                Arguments.of(ChessPosition.get(D, EIGHT), ChessPosition.get(B, ONE), PieceDirection.S, EMPTY_PATH),
-                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(B, THREE), PieceDirection.NE, EMPTY_PATH),
-                Arguments.of(ChessPosition.get(D, ONE), ChessPosition.get(H, FIVE), PieceDirection.NNE, EMPTY_PATH),
+                Arguments.of(ChessPosition.get(D, EIGHT), ChessPosition.get(B, ONE), PieceDirection.S, emptyPath()),
+                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(B, THREE), PieceDirection.NE, emptyPath()),
+                Arguments.of(ChessPosition.get(D, ONE), ChessPosition.get(H, FIVE), PieceDirection.NNE, emptyPath()),
         )
     }
 }

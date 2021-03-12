@@ -1,10 +1,12 @@
 package com.example.demo.chess.domain.board
 
+import com.example.demo.chess.domain.board.path.ChessPath
+import com.example.demo.chess.domain.board.path.emptyPath
 import com.example.demo.chess.domain.piece.move.PieceDirection
 
 data class ChessPosition private constructor(private val row: ChessRow, private val col: ChessCol) {
 
-    fun getPathTo(destination: ChessPosition, direction: PieceDirection): ChessPath {
+    fun getPathTo(destination: ChessPosition, direction: PieceDirection): ChessPath? {
         val path = mutableListOf<ChessPosition>()
 
         var position: ChessPosition? = this
@@ -13,8 +15,8 @@ data class ChessPosition private constructor(private val row: ChessRow, private 
             position = position.getNextPosition(direction)
         }
 
-        if (position != destination) {
-            return EMPTY_PATH
+        if (position == NOT_EXIST_POSITION) {
+            return emptyPath()
         }
         return ChessPath(path.apply { add(position) })
     }
