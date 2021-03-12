@@ -1,9 +1,6 @@
 package com.example.demo.chess.domain.piece.move
 
-import com.example.demo.chess.domain.board.ChessCol
-import com.example.demo.chess.domain.board.ChessPlayer
-import com.example.demo.chess.domain.board.ChessPosition
-import com.example.demo.chess.domain.board.ChessRow
+import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.board.path.ChessPath
 import com.example.demo.chess.domain.piece.ChessPieceInGame
 import com.example.demo.chess.domain.piece.MockPiece
@@ -20,7 +17,7 @@ internal class JustMovingTest {
     fun `JustMoving은 destination이 비어있으면 움직일 수 있다`(path: ChessPath, board: Map<ChessPosition, ChessPieceInGame>, expected: Boolean) {
         val justMoving = JustMoving()
 
-        val result: Boolean = justMoving.canMove(path, board)
+        val result: Boolean = justMoving.canMove(path, ChessBoard(board))
 
         Assertions.assertThat(result).isEqualTo(expected)
     }

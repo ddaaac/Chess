@@ -1,9 +1,6 @@
 package com.example.demo.chess.domain.piece.move
 
-import com.example.demo.chess.domain.board.ChessCol
-import com.example.demo.chess.domain.board.ChessPlayer
-import com.example.demo.chess.domain.board.ChessPosition
-import com.example.demo.chess.domain.board.ChessRow
+import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.board.path.ChessPath
 import com.example.demo.chess.domain.piece.ChessPieceInGame
 import com.example.demo.chess.domain.piece.MockPiece
@@ -20,7 +17,7 @@ internal class BlockingMovingTest {
     fun `BlockingMoving은 source와 destination을 제외한 경로에 다른 기물이 존재하지 않으면 움직일 수 있다`(path: ChessPath, board: Map<ChessPosition, ChessPieceInGame>, expected: Boolean) {
         val blockMoving = BlockMoving()
 
-        val result: Boolean = blockMoving.canMove(path, board)
+        val result: Boolean = blockMoving.canMove(path, ChessBoard(board))
 
         assertThat(result).isEqualTo(expected)
     }
