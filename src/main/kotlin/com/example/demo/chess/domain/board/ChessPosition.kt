@@ -6,7 +6,7 @@ import com.example.demo.chess.domain.piece.move.PieceDirection
 
 data class ChessPosition private constructor(private val row: ChessRow, private val col: ChessCol) {
 
-    fun getPathTo(destination: ChessPosition, direction: PieceDirection): ChessPath? {
+    fun getPathTo(destination: ChessPosition, direction: PieceDirection, limit : Int = 8): ChessPath? {
         val path = mutableListOf<ChessPosition>()
 
         var position: ChessPosition? = this
@@ -15,7 +15,7 @@ data class ChessPosition private constructor(private val row: ChessRow, private 
             position = position.getNextPosition(direction)
         }
 
-        if (position == NOT_EXIST_POSITION) {
+        if ((position == NOT_EXIST_POSITION) || (path.size > limit)) {
             return emptyPath()
         }
         return ChessPath(path.apply { add(position) })
