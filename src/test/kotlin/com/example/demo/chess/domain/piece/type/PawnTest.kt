@@ -15,7 +15,7 @@ internal class PawnTest {
     fun `Pawn은 비어있는 바로 위 칸으로 이동할 수 있다`() {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.A, ChessRow.TWO) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1)
+                ChessPosition.get(ChessCol.A, ChessRow.TWO) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1)
         ))
 
         val result = pawn.move(ChessPosition.get(ChessCol.A, ChessRow.TWO), ChessPosition.get(ChessCol.A, ChessRow.THREE))
@@ -28,7 +28,7 @@ internal class PawnTest {
     fun `Pawn은 위 칸에 기물이 존재하면 움직일 수 없다`(player: ChessPlayer) {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.A, ChessRow.TWO) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.A, ChessRow.TWO) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1),
                 ChessPosition.get(ChessCol.A, ChessRow.THREE) to ChessPieceInGame(MockPiece(), player),
         ))
 
@@ -42,7 +42,7 @@ internal class PawnTest {
     fun `Pawn은 대각선 위에 상대방 기물이 존재하면 움직일 수 있다`(col: ChessCol) {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1),
                 ChessPosition.get(col, ChessRow.THREE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
         ))
 
@@ -56,7 +56,7 @@ internal class PawnTest {
     fun `Pawn은 대각선 위에 아군 기물이 존재하면 움직일 수 없다`(col: ChessCol) {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1),
                 ChessPosition.get(col, ChessRow.THREE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
         ))
 
@@ -69,7 +69,7 @@ internal class PawnTest {
     fun `Pawn은 초기 위치에 있을 경우 위로 두 칸을 움직일 수 있다`() {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1),
         ))
 
         val result = pawn.move(ChessPosition.get(ChessCol.B, ChessRow.TWO), ChessPosition.get(ChessCol.B, ChessRow.FOUR))
@@ -81,7 +81,7 @@ internal class PawnTest {
     fun `Pawn은 초기 위치가 아닐 경우 위로 두 칸을 움직일 수 있다`() {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.B, ChessRow.THREE) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.B, ChessRow.THREE) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1),
         ))
 
         val result = pawn.move(ChessPosition.get(ChessCol.B, ChessRow.THREE), ChessPosition.get(ChessCol.B, ChessRow.FIVE))
@@ -94,8 +94,8 @@ internal class PawnTest {
     fun `Pawn은 초기 위치에 있지만 중간, 목적지에 기물이 있는 경우 위로 두 칸을 움직일 수 없다`(row: ChessRow, player: ChessPlayer) {
         val pawn = Pawn()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(Pawn(), ChessPlayer.PLAYER_1),
-                ChessPosition.get(ChessCol.B, row) to ChessPieceInGame(Pawn(), player),
+                ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(pawn, ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.B, row) to ChessPieceInGame(MockPiece(), player),
         ))
 
         val result = pawn.move(ChessPosition.get(ChessCol.B, ChessRow.TWO), ChessPosition.get(ChessCol.B, ChessRow.FOUR))

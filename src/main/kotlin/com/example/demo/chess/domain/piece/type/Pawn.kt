@@ -33,7 +33,7 @@ class Pawn : ChessPiece {
 
     private fun getDoubleForwardMoveResult(start: ChessPosition, end: ChessPosition): PieceMovingResult? {
         return start.getPathTo(end, MOVE_DIRECTION, INITIAL_MOVE_COUNT)
-                ?.let { PieceMovingResult(it, CombinationOf(DoubleForwardAtInitialPosition(), blockJustMoving())) }
+                ?.let { PieceMovingResult(it, ApplyAll(DoubleForwardAtInitialPosition(), blockJustMoving())) }
     }
 
     private fun getAttackResult(start: ChessPosition, end: ChessPosition): PieceMovingResult? {
