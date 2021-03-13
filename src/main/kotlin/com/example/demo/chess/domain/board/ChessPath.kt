@@ -1,6 +1,4 @@
-package com.example.demo.chess.domain.board.path
-
-import com.example.demo.chess.domain.board.ChessPosition
+package com.example.demo.chess.domain.board
 
 const val MIN_PATH_SIZE = 2
 

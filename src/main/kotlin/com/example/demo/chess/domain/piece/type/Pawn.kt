@@ -1,11 +1,6 @@
 package com.example.demo.chess.domain.piece.type
 
-import com.example.demo.chess.domain.board.ChessBoard
-import com.example.demo.chess.domain.board.ChessCol
-import com.example.demo.chess.domain.board.ChessPosition
-import com.example.demo.chess.domain.board.ChessRow
-import com.example.demo.chess.domain.board.path.ChessPath
-import com.example.demo.chess.domain.board.path.getExistPath
+import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.piece.ChessPiece
 import com.example.demo.chess.domain.piece.move.*
 

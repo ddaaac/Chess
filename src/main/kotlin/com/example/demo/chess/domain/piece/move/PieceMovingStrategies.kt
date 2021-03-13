@@ -1,7 +1,7 @@
 package com.example.demo.chess.domain.piece.move
 
 import com.example.demo.chess.domain.board.ChessBoard
-import com.example.demo.chess.domain.board.path.ChessPath
+import com.example.demo.chess.domain.board.ChessPath
 import com.example.demo.chess.domain.piece.ChessPieceInGame
 
 class BlockMoving : AbstractPieceMovingStrategy() {

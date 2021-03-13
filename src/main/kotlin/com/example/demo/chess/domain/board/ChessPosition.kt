@@ -1,7 +1,5 @@
 package com.example.demo.chess.domain.board
 
-import com.example.demo.chess.domain.board.path.ChessPath
-import com.example.demo.chess.domain.board.path.emptyPath
 import com.example.demo.chess.domain.piece.move.PieceDirection
 
 data class ChessPosition private constructor(val row: ChessRow, val col: ChessCol) {
