@@ -4,7 +4,7 @@ import com.example.demo.chess.domain.board.path.ChessPath
 import com.example.demo.chess.domain.board.path.emptyPath
 import com.example.demo.chess.domain.piece.move.PieceDirection
 
-data class ChessPosition private constructor(private val row: ChessRow, private val col: ChessCol) {
+data class ChessPosition private constructor(val row: ChessRow, val col: ChessCol) {
 
     fun getPathTo(destination: ChessPosition, direction: PieceDirection, limit : Int = 8): ChessPath? {
         val path = mutableListOf<ChessPosition>()
