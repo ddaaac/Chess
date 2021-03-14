@@ -2,6 +2,8 @@ package com.example.demo.chess.domain.piece.play
 
 import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.piece.ChessPieceInGame
+import com.example.demo.chess.domain.piece.MOCK_PIECE_PLAYER_1
+import com.example.demo.chess.domain.piece.MOCK_PIECE_PLAYER_2
 import com.example.demo.chess.domain.piece.MockPiece
 import com.example.demo.chess.domain.piece.type.EMPTY_PIECE
 import org.assertj.core.api.Assertions
@@ -22,8 +24,8 @@ internal class MovingTest {
     }
 
     companion object {
-        private val mockPiece = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1)
-        private val mockPieceOpponent = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2)
+        private val mockPiece = MOCK_PIECE_PLAYER_1
+        private val mockPieceOpponent = MOCK_PIECE_PLAYER_2
 
         @JvmStatic
         fun generateJust() = listOf(

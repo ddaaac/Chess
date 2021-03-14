@@ -27,7 +27,7 @@ internal class BishopTest {
     @CsvSource(value = ["A,ONE", "G,ONE", "A,SEVEN", "H,EIGHT", "C,FIVE", "C,THREE"])
     fun `Bishop은 경로 중간에 기물이 존재하지 않고 destination이 비어있는 대각선 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(BISHOP, ChessPlayer.PLAYER_1)
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to BISHOP_WHITE
         ))
 
         val result = BISHOP.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
@@ -39,8 +39,8 @@ internal class BishopTest {
     @CsvSource(value = ["A,ONE", "G,ONE", "A,SEVEN", "H,EIGHT", "C,FIVE", "C,THREE"])
     fun `Bishop은 경로 중간에 기물이 존재하지 않고 destination에 적 기물이 있는 경우 대각선 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(BISHOP, ChessPlayer.PLAYER_1),
-                ChessPosition.get(col, row) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to BISHOP_WHITE,
+                ChessPosition.get(col, row) to BISHOP_BLACK,
         ))
 
         val result = BISHOP.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
@@ -51,8 +51,8 @@ internal class BishopTest {
     @Test
     fun `Bishop은 destination이 아군 기물일 경우 이동할 수 없다`() {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(BISHOP, ChessPlayer.PLAYER_1),
-                ChessPosition.get(ChessCol.A, ChessRow.ONE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to BISHOP_WHITE,
+                ChessPosition.get(ChessCol.A, ChessRow.ONE) to BISHOP_WHITE,
         ))
 
         val result = BISHOP.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.A, ChessRow.ONE))
@@ -64,7 +64,7 @@ internal class BishopTest {
     @ValueSource(strings = ["PLAYER_1", "PLAYER_2"])
     fun `Bishop 경로 중간에 기물이 있는 경우 이동할 수 없다`(player: ChessPlayer) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(BISHOP, ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to BISHOP_WHITE,
                 ChessPosition.get(ChessCol.B, ChessRow.TWO) to ChessPieceInGame(MockPiece(), player),
         ))
 

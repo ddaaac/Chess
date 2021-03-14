@@ -2,6 +2,8 @@ package com.example.demo.chess.domain.piece.type
 
 import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.piece.ChessPieceInGame
+import com.example.demo.chess.domain.piece.MOCK_PIECE_PLAYER_1
+import com.example.demo.chess.domain.piece.MOCK_PIECE_PLAYER_2
 import com.example.demo.chess.domain.piece.MockPiece
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -27,7 +29,7 @@ internal class QueenTest {
     @CsvSource(value = ["A,ONE", "D,ONE", "G,ONE", "A,FOUR", "H,FOUR", "A,SEVEN", "D,EIGHT", "H,EIGHT", "C,FOUR", "D,FIVE"])
     fun `Queen은 경로 중간에 기물이 존재하지 않고 destination이 비어있는 상하좌우 대각선 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(QUEEN, ChessPlayer.PLAYER_1)
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to QUEEN_WHITE
         ))
 
         val result = QUEEN.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
@@ -39,8 +41,8 @@ internal class QueenTest {
     @CsvSource(value = ["A,ONE", "D,ONE", "G,ONE", "A,FOUR", "H,FOUR", "A,SEVEN", "D,EIGHT", "H,EIGHT", "C,FOUR", "D,FIVE"])
     fun `Queen은 경로 중간에 기물이 존재하지 않고 destination에 적 기물이 있는 경우 상하좌우 대각선 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(QUEEN, ChessPlayer.PLAYER_1),
-                ChessPosition.get(col, row) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to QUEEN_WHITE,
+                ChessPosition.get(col, row) to MOCK_PIECE_PLAYER_2,
         ))
 
         val result = QUEEN.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
@@ -51,8 +53,8 @@ internal class QueenTest {
     @Test
     fun `Queen은 destination이 아군 기물일 경우 이동할 수 없다`() {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(QUEEN, ChessPlayer.PLAYER_1),
-                ChessPosition.get(ChessCol.D, ChessRow.ONE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to QUEEN_WHITE,
+                ChessPosition.get(ChessCol.D, ChessRow.ONE) to MOCK_PIECE_PLAYER_1,
         ))
 
         val result = QUEEN.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.D, ChessRow.ONE))
@@ -64,7 +66,7 @@ internal class QueenTest {
     @ValueSource(strings = ["PLAYER_1", "PLAYER_2"])
     fun `Queen은 경로 중간에 기물이 있는 경우 이동할 수 없다`(player: ChessPlayer) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(QUEEN, ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to QUEEN_WHITE,
                 ChessPosition.get(ChessCol.D, ChessRow.TWO) to ChessPieceInGame(MockPiece(), player),
         ))
 

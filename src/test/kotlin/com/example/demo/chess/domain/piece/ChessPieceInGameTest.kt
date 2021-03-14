@@ -1,5 +1,6 @@
 package com.example.demo.chess.domain.piece
 
+import com.example.demo.chess.domain.board.ChessPlayer
 import com.example.demo.chess.domain.board.ChessPosition
 import com.example.demo.chess.domain.piece.play.PieceMovingResults
 import com.example.demo.chess.domain.piece.type.EMPTY_PIECE
@@ -18,3 +19,6 @@ class MockPiece : ChessPiece {
         throw UnsupportedOperationException()
     }
 }
+
+val MOCK_PIECE_PLAYER_1 = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1)
+val MOCK_PIECE_PLAYER_2 = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2)

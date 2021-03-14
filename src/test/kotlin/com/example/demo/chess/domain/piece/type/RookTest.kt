@@ -2,6 +2,8 @@ package com.example.demo.chess.domain.piece.type
 
 import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.piece.ChessPieceInGame
+import com.example.demo.chess.domain.piece.MOCK_PIECE_PLAYER_1
+import com.example.demo.chess.domain.piece.MOCK_PIECE_PLAYER_2
 import com.example.demo.chess.domain.piece.MockPiece
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -40,7 +42,7 @@ internal class RookTest {
     fun `Rook은 경로 중간에 기물이 존재하지 않고 destination에 적 기물이 있는 경우 상하좌우 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
                 ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_1),
-                ChessPosition.get(col, row) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
+                ChessPosition.get(col, row) to MOCK_PIECE_PLAYER_2,
         ))
 
         val result = ROOK.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
@@ -52,7 +54,7 @@ internal class RookTest {
     fun `Rook은 destination이 아군 기물일 경우 이동할 수 없다`() {
         val board = ChessBoard(mapOf(
                 ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_1),
-                ChessPosition.get(ChessCol.D, ChessRow.ONE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.ONE) to MOCK_PIECE_PLAYER_1,
         ))
 
         val result = ROOK.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.D, ChessRow.ONE))
