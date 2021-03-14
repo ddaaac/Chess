@@ -25,15 +25,14 @@ internal class KnightTest {
     @ParameterizedTest
     @CsvSource(value = ["B,THREE", "B,FIVE", "C,TWO", "C,SIX", "E,TWO", "E,SIX", "F,THREE", "F,FIVE"])
     fun `Knight는 다른 기물과는 상관없이 destination이 비어있는 Knight 방향으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
-        val knight = Knight()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(knight, ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(KNIGHT, ChessPlayer.PLAYER_1),
                 ChessPosition.get(ChessCol.C, ChessRow.FOUR) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
                 ChessPosition.get(ChessCol.D, ChessRow.THREE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
                 ChessPosition.get(ChessCol.E, ChessRow.FIVE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
         ))
 
-        val result = knight.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
+        val result = KNIGHT.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
 
         Assertions.assertThat(result.canMoveWith(board)).isTrue()
     }
@@ -41,29 +40,27 @@ internal class KnightTest {
     @ParameterizedTest
     @CsvSource(value = ["B,THREE", "B,FIVE", "C,TWO", "C,SIX", "E,TWO", "E,SIX", "F,THREE", "F,FIVE"])
     fun `Knight는 다른 기물과는 상관없이 destination에 적 기물이 있는 Knight 방향으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
-        val knight = Knight()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(knight, ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(KNIGHT, ChessPlayer.PLAYER_1),
                 ChessPosition.get(ChessCol.C, ChessRow.FOUR) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
                 ChessPosition.get(ChessCol.D, ChessRow.THREE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
                 ChessPosition.get(ChessCol.E, ChessRow.FIVE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2),
         ))
 
 
-        val result = knight.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
+        val result = KNIGHT.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
 
         Assertions.assertThat(result.canMoveWith(board)).isTrue()
     }
 
     @Test
     fun `Knight은 destination이 아군 기물일 경우 이동할 수 없다`() {
-        val knight = Knight()
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(knight, ChessPlayer.PLAYER_1),
+                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(KNIGHT, ChessPlayer.PLAYER_1),
                 ChessPosition.get(ChessCol.B, ChessRow.THREE) to ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1),
         ))
 
-        val result = knight.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.B, ChessRow.THREE))
+        val result = KNIGHT.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.B, ChessRow.THREE))
 
         Assertions.assertThat(result.canMoveWith(board)).isFalse()
     }
