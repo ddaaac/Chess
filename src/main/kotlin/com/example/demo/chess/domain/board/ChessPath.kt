@@ -3,6 +3,7 @@ package com.example.demo.chess.domain.board
 const val MIN_PATH_SIZE = 2
 
 class ChessPath(val path: List<ChessPosition>) {
+
     init {
         require(path.size >= MIN_PATH_SIZE) {
             "Path should have at least source and destination"
@@ -15,7 +16,7 @@ class ChessPath(val path: List<ChessPosition>) {
     fun isSizeOf(size: Int) = (path.size == size)
 }
 
-fun List<ChessPath?>.getExistPath(): ChessPath? {
+fun List<ChessPath?>.findNotEmptyPath(): ChessPath? {
     return firstOrNull { it != emptyPath() }
 }
 

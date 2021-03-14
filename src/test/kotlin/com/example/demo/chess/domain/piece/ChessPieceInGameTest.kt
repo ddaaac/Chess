@@ -1,7 +1,7 @@
 package com.example.demo.chess.domain.piece
 
 import com.example.demo.chess.domain.board.ChessPosition
-import com.example.demo.chess.domain.piece.move.PieceMovingResults
+import com.example.demo.chess.domain.piece.play.PieceMovingResults
 import com.example.demo.chess.domain.piece.type.EMPTY_PIECE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

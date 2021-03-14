@@ -1,4 +1,4 @@
-package com.example.demo.chess.domain.piece.move
+package com.example.demo.chess.domain.piece.play
 
 import com.example.demo.chess.domain.board.ChessCol
 import com.example.demo.chess.domain.board.ChessRow

@@ -1,4 +1,4 @@
-package com.example.demo.chess.domain.piece.move
+package com.example.demo.chess.domain.piece.play
 
 import com.example.demo.chess.domain.board.*
 import com.example.demo.chess.domain.piece.ChessPieceInGame
@@ -9,14 +9,14 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-internal class JustMovingTest {
+internal class MovingTest {
 
     @ParameterizedTest
     @MethodSource("generateJust")
     fun `JustMoving은 destination이 비어있으면 움직일 수 있다`(path: ChessPath, board: Map<ChessPosition, ChessPieceInGame>, expected: Boolean) {
-        val justMoving = JustMoving()
+        val justMoving = Moving()
 
-        val result: Boolean = justMoving.canMove(path, ChessBoard(board))
+        val result: Boolean = justMoving.canPlay(path, ChessBoard(board))
 
         Assertions.assertThat(result).isEqualTo(expected)
     }

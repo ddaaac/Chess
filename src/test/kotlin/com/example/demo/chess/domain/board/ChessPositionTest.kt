@@ -2,7 +2,7 @@ package com.example.demo.chess.domain.board
 
 import com.example.demo.chess.domain.board.ChessCol.*
 import com.example.demo.chess.domain.board.ChessRow.*
-import com.example.demo.chess.domain.piece.move.PieceDirection
+import com.example.demo.chess.domain.piece.play.PieceDirection
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
