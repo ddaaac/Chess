@@ -7,6 +7,7 @@ private val ATTACK = AttackMoving()
 fun blockMoving(): PieceMovingStrategy = BLOCK
 fun justMoving(): PieceMovingStrategy = JUST
 fun attackMoving(): PieceMovingStrategy = ATTACK
+fun justOrAttackMoving(): PieceMovingStrategy = ApplyAny(JUST, ATTACK)
 fun blockJustMoving(): PieceMovingStrategy = ApplyAll(BLOCK, JUST)
 fun blockAttackMoving(): PieceMovingStrategy = ApplyAll(BLOCK, ATTACK)
 fun blockJustOrAttackMoving(): PieceMovingStrategy = ApplyAll(BLOCK, ApplyAny(JUST, ATTACK))
