@@ -15,4 +15,8 @@ enum class ChessRow {
     fun next(step: Int): ChessRow =
             values().getOrNull(ordinal + step)
                     ?: throw IllegalArgumentException("Range of row is between 1 to 8")
+
+    fun reversed(): ChessRow = values().let {
+        it[it.size - ordinal - 1]
+    }
 }

@@ -69,16 +69,16 @@ internal class PawnTest {
     fun `Pawn은 초기 위치에 있을 경우 위로 두 칸을 움직일 수 있다`() {
 
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.B, ChessRow.TWO) to PAWN_WHITE,
+                ChessPosition.get(ChessCol.A, ChessRow.TWO) to PAWN_WHITE,
         ))
 
-        val result = PAWN.move(ChessPosition.get(ChessCol.B, ChessRow.TWO), ChessPosition.get(ChessCol.B, ChessRow.FOUR))
+        val result = PAWN.move(ChessPosition.get(ChessCol.A, ChessRow.TWO), ChessPosition.get(ChessCol.A, ChessRow.FOUR))
 
         assertThat(result.canMoveWith(board)).isTrue()
     }
 
     @Test
-    fun `Pawn은 초기 위치가 아닐 경우 위로 두 칸을 움직일 수 있다`() {
+    fun `Pawn은 초기 위치가 아닐 경우 위로 두 칸을 움직일 수 없다`() {
         val board = ChessBoard(mapOf(
                 ChessPosition.get(ChessCol.B, ChessRow.THREE) to PAWN_WHITE,
         ))

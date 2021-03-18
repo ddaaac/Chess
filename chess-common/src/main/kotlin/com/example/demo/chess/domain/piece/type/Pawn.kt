@@ -41,14 +41,14 @@ class Pawn : ChessPiece {
 
 private class DoubleForwardAtInitialPosition : ChessPlayingStrategy {
     private val initialPawnPositions: List<ChessPosition> = listOf(
-            ChessPosition.get(ChessCol.B, ChessRow.ONE),
+            ChessPosition.get(ChessCol.A, ChessRow.TWO),
             ChessPosition.get(ChessCol.B, ChessRow.TWO),
-            ChessPosition.get(ChessCol.B, ChessRow.THREE),
-            ChessPosition.get(ChessCol.B, ChessRow.FOUR),
-            ChessPosition.get(ChessCol.B, ChessRow.FIVE),
-            ChessPosition.get(ChessCol.B, ChessRow.SIX),
-            ChessPosition.get(ChessCol.B, ChessRow.SEVEN),
-            ChessPosition.get(ChessCol.B, ChessRow.EIGHT),
+            ChessPosition.get(ChessCol.C, ChessRow.TWO),
+            ChessPosition.get(ChessCol.D, ChessRow.TWO),
+            ChessPosition.get(ChessCol.E, ChessRow.TWO),
+            ChessPosition.get(ChessCol.F, ChessRow.TWO),
+            ChessPosition.get(ChessCol.G, ChessRow.TWO),
+            ChessPosition.get(ChessCol.H, ChessRow.TWO),
     )
 
     override fun canPlay(path: ChessPath, board: ChessBoard): Boolean {

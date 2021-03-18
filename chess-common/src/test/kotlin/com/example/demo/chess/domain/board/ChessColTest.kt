@@ -3,6 +3,7 @@ package com.example.demo.chess.domain.board
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 
 internal class ChessColTest {
@@ -45,5 +46,11 @@ internal class ChessColTest {
                 Arguments.of(ChessCol.A, 8),
                 Arguments.of(ChessCol.H, 1),
         )
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["A,H", "B,G", "C,F", "D,E", "E,D", "F,C", "G,B", "H,A"])
+    fun `대칭되는 col를 반환한다`(col: ChessCol, expected: ChessCol) {
+        Assertions.assertThat(col.reversed()).isEqualTo(expected)
     }
 }

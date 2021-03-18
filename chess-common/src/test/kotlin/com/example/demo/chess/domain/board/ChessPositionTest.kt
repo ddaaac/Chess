@@ -4,6 +4,7 @@ import com.example.demo.chess.domain.board.ChessCol.*
 import com.example.demo.chess.domain.board.ChessRow.*
 import com.example.demo.chess.domain.piece.play.PieceDirection
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -71,5 +72,10 @@ internal class ChessPositionTest {
                 Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(B, THREE), PieceDirection.NE, 8, emptyPath()),
                 Arguments.of(ChessPosition.get(D, ONE), ChessPosition.get(H, FIVE), PieceDirection.NNE, 8, emptyPath()),
         )
+    }
+
+    @Test
+    fun `대칭에 있는 좌표를 구한다`() {
+        assertThat(ChessPosition.get(D, ONE).reversed()).isEqualTo(ChessPosition.get(E, EIGHT))
     }
 }

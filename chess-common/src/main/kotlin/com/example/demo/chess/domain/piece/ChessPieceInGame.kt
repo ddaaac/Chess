@@ -12,4 +12,6 @@ class ChessPieceInGame(private val piece: ChessPiece, private val player: ChessP
     fun isEmpty() = (piece == EMPTY_PIECE.piece)
 
     fun isOpponentOf(other: ChessPieceInGame) = (player.isOpponentOf(other.player))
+
+    fun isPlayerOf(player: ChessPlayer) = (this.player == player)
 }

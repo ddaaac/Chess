@@ -2,8 +2,10 @@ package com.example.demo.chess.domain.board
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 
 internal class ChessRowTest {
@@ -46,5 +48,11 @@ internal class ChessRowTest {
                 Arguments.of(ChessRow.ONE, 8),
                 Arguments.of(ChessRow.EIGHT, 1),
         )
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["ONE,EIGHT", "TWO,SEVEN", "THREE,SIX", "FOUR,FIVE", "FIVE,FOUR", "SIX,THREE", "SEVEN,TWO", "EIGHT,ONE"])
+    fun `대칭되는 row를 반환한다`(row: ChessRow, expected: ChessRow) {
+        assertThat(row.reversed()).isEqualTo(expected)
     }
 }

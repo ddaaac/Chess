@@ -20,5 +20,5 @@ class MockPiece : ChessPiece {
     }
 }
 
-val MOCK_PIECE_PLAYER_1 = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1)
-val MOCK_PIECE_PLAYER_2 = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2)
+val MOCK_PIECE_PLAYER_1 = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_2)
+val MOCK_PIECE_PLAYER_2 = ChessPieceInGame(MockPiece(), ChessPlayer.PLAYER_1)

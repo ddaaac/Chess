@@ -19,6 +19,8 @@ data class ChessPosition private constructor(val row: ChessRow, val col: ChessCo
         return ChessPath(path.apply { add(position) })
     }
 
+    fun reversed(): ChessPosition = get(col.reversed(), row.reversed())
+
     private fun getNextPosition(direction: PieceDirection): ChessPosition? {
         return try {
             val (nextCol, nextRow) = direction.nextOf(col, row)

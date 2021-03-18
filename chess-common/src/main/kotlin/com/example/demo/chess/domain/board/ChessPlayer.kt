@@ -10,4 +10,8 @@ enum class ChessPlayer {
             else -> false
         }
     }
+
+    fun isBlack() = (this == PLAYER_1)
+
+    fun isWhite() = (this == PLAYER_2)
 }
