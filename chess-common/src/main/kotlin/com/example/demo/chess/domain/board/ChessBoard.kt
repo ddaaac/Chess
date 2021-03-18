@@ -52,9 +52,9 @@ class ChessBoard(
                 .apply { require(isPlayerOf(playerOfTurn)) { "It is not turn of source piece." } }
     }
 
-    private fun replace(source: ChessPosition, destination: ChessPosition): Map<ChessPosition, ChessPieceInGame> {
-        return pieces.minus(source)
-                .minus(destination)
-                .plus(destination to pieces.getValue(source))
+    private fun replace(removed: ChessPosition, added: ChessPosition): Map<ChessPosition, ChessPieceInGame> {
+        return pieces.minus(removed)
+                .minus(added)
+                .plus(added to pieces.getValue(removed))
     }
 }

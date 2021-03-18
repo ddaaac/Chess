@@ -4,7 +4,7 @@ import com.example.demo.chess.domain.board.ChessBoard
 import com.example.demo.chess.domain.board.ChessPath
 import com.example.demo.chess.domain.piece.ChessPieceInGame
 
-interface ChessPlayingStrategy {
+fun interface ChessPlayingStrategy {
 
     fun canPlay(path: ChessPath, board: ChessBoard): Boolean
 }
