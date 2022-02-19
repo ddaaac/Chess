@@ -1,6 +1,7 @@
 package com.example.demo.chess.domain.board
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -11,17 +12,14 @@ internal class ChessColTest {
     @ParameterizedTest
     @MethodSource("createCol")
     fun next(base: ChessCol, step: Int, expected: ChessCol) {
-        Assertions.assertThat(base.next(step)).isEqualTo(expected)
+        assertThat(base.next(step)).isEqualTo(expected)
 
     }
 
     @ParameterizedTest
     @MethodSource("createExceptionCol")
-    fun nextError(base: ChessCol, step: Int) {
-        Assertions.assertThatIllegalArgumentException()
-                .isThrownBy { base.next(step) }
-                .withMessage("Range of column is between A to H")
-
+    fun nextNotExist(base: ChessCol, step: Int) {
+        assertThat(base.next(step)).isNull()
     }
 
     companion object {

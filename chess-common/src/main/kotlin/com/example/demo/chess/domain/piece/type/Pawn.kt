@@ -6,21 +6,20 @@ import com.example.demo.chess.domain.piece.ChessPiece
 import com.example.demo.chess.domain.piece.play.*
 import com.example.demo.chess.domain.piece.play.PieceMovingResult.Companion.NO_RESULT
 
-private val MOVE_DIRECTION = PieceDirection.N
-private val ATTACK_DIRECTIONS = listOf(PieceDirection.NE, PieceDirection.NW)
 private const val NORMAL_MOVE_COUNT = 1
 private const val INITIAL_MOVE_COUNT = 2
-private const val INITIAL_MOVE_ALLOW_PATH_SIZE = 3
 
+private val MOVE_DIRECTION = PieceDirection.N
+private val ATTACK_DIRECTIONS = listOf(PieceDirection.NE, PieceDirection.NW)
 private val INITIAL_PAWN_POSITIONS: List<ChessPosition> = listOf(
-        ChessPosition.get(ChessCol.A, ChessRow.TWO),
-        ChessPosition.get(ChessCol.B, ChessRow.TWO),
-        ChessPosition.get(ChessCol.C, ChessRow.TWO),
-        ChessPosition.get(ChessCol.D, ChessRow.TWO),
-        ChessPosition.get(ChessCol.E, ChessRow.TWO),
-        ChessPosition.get(ChessCol.F, ChessRow.TWO),
-        ChessPosition.get(ChessCol.G, ChessRow.TWO),
-        ChessPosition.get(ChessCol.H, ChessRow.TWO),
+        ChessPosition.get(ChessRow.TWO, ChessCol.A),
+        ChessPosition.get(ChessRow.TWO, ChessCol.B),
+        ChessPosition.get(ChessRow.TWO, ChessCol.C),
+        ChessPosition.get(ChessRow.TWO, ChessCol.D),
+        ChessPosition.get(ChessRow.TWO, ChessCol.E),
+        ChessPosition.get(ChessRow.TWO, ChessCol.F),
+        ChessPosition.get(ChessRow.TWO, ChessCol.G),
+        ChessPosition.get(ChessRow.TWO, ChessCol.H),
 )
 
 class Pawn : ChessPiece {
@@ -33,19 +32,20 @@ class Pawn : ChessPiece {
     }
 
     private fun getMoveResult(start: ChessPosition, end: ChessPosition): PieceMovingResult? {
-        return start.getPathTo(end, MOVE_DIRECTION, NORMAL_MOVE_COUNT)
-                ?.let { PieceMovingResult(blockMoving(), it) }
+        return start.findPathTo(end, MOVE_DIRECTION, NORMAL_MOVE_COUNT)
+                ?.let { PieceMovingResult(BLOCK_MOVING, it) }
     }
 
     private fun getDoubleForwardMoveResult(start: ChessPosition, end: ChessPosition): PieceMovingResult? {
-        return start.getPathTo(end, MOVE_DIRECTION, INITIAL_MOVE_COUNT)
-                ?.let { PieceMovingResult(ApplyAll(DoubleForwardAtInitialPosition(), blockMoving()), it) }
+        return start.findPathTo(end, MOVE_DIRECTION, INITIAL_MOVE_COUNT)
+                ?.let { PieceMovingResult(ApplyAll(DoubleForwardAtInitialPosition(), BLOCK_MOVING), it) }
     }
 
     private fun getAttackResult(start: ChessPosition, end: ChessPosition): PieceMovingResult? {
-        return ATTACK_DIRECTIONS.map { start.getPathTo(end, it, NORMAL_MOVE_COUNT) }
-                .findNotEmptyPath()
-                ?.let { PieceMovingResult(blockAttack(), it) }
+        return ATTACK_DIRECTIONS
+                .mapNotNull { start.findPathTo(end, it, NORMAL_MOVE_COUNT) }
+                .firstOrNull()
+                ?.let { PieceMovingResult(BLOCK_ATTACK, it) }
     }
 }
 
@@ -64,4 +64,8 @@ private class DoubleForwardAtInitialPosition : ChessPlayingStrategy {
         return true
     }
 
+    companion object {
+
+        private const val INITIAL_MOVE_ALLOW_PATH_SIZE = 3
+    }
 }

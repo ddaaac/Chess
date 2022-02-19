@@ -1,8 +1,6 @@
 package com.example.demo.chess.domain.board
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -19,10 +17,8 @@ internal class ChessRowTest {
 
     @ParameterizedTest
     @MethodSource("createExceptionRow")
-    fun nextError(base: ChessRow, step: Int) {
-        assertThatIllegalArgumentException()
-                .isThrownBy { base.next(step) }
-                .withMessage("Range of row is between 1 to 8")
+    fun nextNotExist(base: ChessRow, step: Int) {
+        assertThat(base.next(step)).isNull()
 
     }
 

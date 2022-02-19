@@ -17,10 +17,10 @@ internal class KingTest {
     @CsvSource(value = ["D,THREE", "D,FIVE", "C,FOUR", "E,FOUR", "C,FIVE", "C,THREE", "E,FIVE", "E,THREE"])
     fun `King은 destination이 비어있는 상하좌우 대각선 한 칸을 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to KING_WHITE
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to KING_WHITE
         ))
 
-        val result = KING.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
+        val result = KING.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(row, col))
 
         Assertions.assertThat(result.canMoveWith(board)).isTrue()
     }
@@ -29,11 +29,11 @@ internal class KingTest {
     @CsvSource(value = ["D,THREE", "D,FIVE", "C,FOUR", "E,FOUR", "C,FIVE", "C,THREE", "E,FIVE", "E,THREE"])
     fun `King은 destination에 적 기물이 있는 경우 상하좌우 대각선 한 칸을 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to KING_WHITE,
-                ChessPosition.get(col, row) to MOCK_PIECE_PLAYER_2,
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to KING_WHITE,
+                ChessPosition.get(row, col) to MOCK_PIECE_PLAYER_2,
         ))
 
-        val result = KING.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
+        val result = KING.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(row, col))
 
         Assertions.assertThat(result.canMoveWith(board)).isTrue()
     }
@@ -41,11 +41,11 @@ internal class KingTest {
     @Test
     fun `King은 destination이 아군 기물일 경우 이동할 수 없다`() {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to KING_WHITE,
-                ChessPosition.get(ChessCol.D, ChessRow.THREE) to MOCK_PIECE_PLAYER_1,
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to KING_WHITE,
+                ChessPosition.get(ChessRow.THREE, ChessCol.D) to MOCK_PIECE_PLAYER_1,
         ))
 
-        val result = KING.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.D, ChessRow.THREE))
+        val result = KING.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(ChessRow.THREE, ChessCol.D))
 
         Assertions.assertThat(result.canMoveWith(board)).isFalse()
     }

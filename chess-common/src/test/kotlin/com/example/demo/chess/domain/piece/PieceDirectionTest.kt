@@ -14,31 +14,31 @@ internal class PieceDirectionTest {
 
     @ParameterizedTest
     @MethodSource("generateDirections")
-    fun `D4를 기준으로 각 방향으로 한 번 움직인 좌표를 구한다`(direction: PieceDirection, expectedCol: ChessCol, expectedRow: ChessRow) {
-        val result = direction.nextOf(D, FOUR)
-        assertThat(result).isEqualTo(expectedCol to expectedRow)
+    fun `D4를 기준으로 각 방향으로 한 번 움직인 좌표를 구한다`(direction: PieceDirection, expectedRow: ChessRow, expectedCol: ChessCol) {
+        val result = direction.nextOf(FOUR, D)
+        assertThat(result).isEqualTo(expectedRow to expectedCol)
     }
 
     companion object {
         @JvmStatic
         // D4
         fun generateDirections() = listOf(
-                Arguments.of(PieceDirection.N, D, FIVE),
-                Arguments.of(PieceDirection.S, D, THREE),
-                Arguments.of(PieceDirection.W, C, FOUR),
-                Arguments.of(PieceDirection.E, E, FOUR),
-                Arguments.of(PieceDirection.NW, C, FIVE),
-                Arguments.of(PieceDirection.NE, E, FIVE),
-                Arguments.of(PieceDirection.SW, C, THREE),
-                Arguments.of(PieceDirection.SE, E, THREE),
-                Arguments.of(PieceDirection.NNW, C, SIX),
-                Arguments.of(PieceDirection.NWW, B, FIVE),
-                Arguments.of(PieceDirection.NNE, E, SIX),
-                Arguments.of(PieceDirection.NEE, F, FIVE),
-                Arguments.of(PieceDirection.SSW, C, TWO),
-                Arguments.of(PieceDirection.SWW, B, THREE),
-                Arguments.of(PieceDirection.SSE, E, TWO),
-                Arguments.of(PieceDirection.SEE, F, THREE),
+                Arguments.of(PieceDirection.N, FIVE, D),
+                Arguments.of(PieceDirection.S, THREE, D),
+                Arguments.of(PieceDirection.W, FOUR, C),
+                Arguments.of(PieceDirection.E, FOUR, E),
+                Arguments.of(PieceDirection.NW, FIVE, C),
+                Arguments.of(PieceDirection.NE, FIVE, E),
+                Arguments.of(PieceDirection.SW, THREE, C),
+                Arguments.of(PieceDirection.SE, THREE, E),
+                Arguments.of(PieceDirection.NNW, SIX, C),
+                Arguments.of(PieceDirection.NWW, FIVE, B),
+                Arguments.of(PieceDirection.NNE, SIX, E),
+                Arguments.of(PieceDirection.NEE, FIVE, F),
+                Arguments.of(PieceDirection.SSW, TWO, C),
+                Arguments.of(PieceDirection.SWW, THREE, B),
+                Arguments.of(PieceDirection.SSE, TWO, E),
+                Arguments.of(PieceDirection.SEE, THREE, F),
         )
     }
 }

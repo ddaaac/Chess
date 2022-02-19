@@ -21,7 +21,9 @@ enum class PieceDirection(private val nextRow: Int, private val nextCol: Int) {
     SSE(-2, 1),
     SEE(-1, 2);
 
-    fun nextOf(col: ChessCol, row: ChessRow): Pair<ChessCol, ChessRow> {
-        return col.next(nextCol) to row.next(nextRow)
+    fun nextOf(row: ChessRow, col: ChessCol): Pair<ChessRow, ChessCol>? {
+        val nextRow = row.next(nextRow) ?: return null
+        val nextCol = col.next(nextCol) ?: return null
+        return nextRow to nextCol
     }
 }

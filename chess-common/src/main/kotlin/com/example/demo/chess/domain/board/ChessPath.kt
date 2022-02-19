@@ -15,9 +15,3 @@ class ChessPath(val path: List<ChessPosition>) {
 
     fun isSizeOf(size: Int) = (path.size == size)
 }
-
-fun List<ChessPath?>.findNotEmptyPath(): ChessPath? {
-    return firstOrNull { it != emptyPath() }
-}
-
-fun emptyPath(): ChessPath? = null

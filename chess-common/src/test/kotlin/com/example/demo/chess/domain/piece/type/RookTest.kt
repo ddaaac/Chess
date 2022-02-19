@@ -29,10 +29,10 @@ internal class RookTest {
     @CsvSource(value = ["D,ONE", "A,FOUR", "H,FOUR", "D,EIGHT", "C,FOUR", "D,FIVE"])
     fun `Rook은 경로 중간에 기물이 존재하지 않고 destination이 비어있는 상하좌우 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2)
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2)
         ))
 
-        val result = ROOK.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
+        val result = ROOK.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(row, col))
 
         Assertions.assertThat(result.canMoveWith(board)).isTrue()
     }
@@ -41,11 +41,11 @@ internal class RookTest {
     @CsvSource(value = ["D,ONE", "A,FOUR", "H,FOUR", "D,EIGHT", "C,FOUR", "D,FIVE"])
     fun `Rook은 경로 중간에 기물이 존재하지 않고 destination에 적 기물이 있는 경우 상하좌우 어느 칸으로 이동할 수 있다`(col: ChessCol, row: ChessRow) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2),
-                ChessPosition.get(col, row) to MOCK_PIECE_PLAYER_2,
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2),
+                ChessPosition.get(row, col) to MOCK_PIECE_PLAYER_2,
         ))
 
-        val result = ROOK.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(col, row))
+        val result = ROOK.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(row, col))
 
         Assertions.assertThat(result.canMoveWith(board)).isTrue()
     }
@@ -53,11 +53,11 @@ internal class RookTest {
     @Test
     fun `Rook은 destination이 아군 기물일 경우 이동할 수 없다`() {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2),
-                ChessPosition.get(ChessCol.D, ChessRow.ONE) to MOCK_PIECE_PLAYER_1,
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2),
+                ChessPosition.get(ChessRow.ONE, ChessCol.D) to MOCK_PIECE_PLAYER_1,
         ))
 
-        val result = ROOK.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.D, ChessRow.ONE))
+        val result = ROOK.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(ChessRow.ONE, ChessCol.D))
 
         Assertions.assertThat(result.canMoveWith(board)).isFalse()
     }
@@ -66,11 +66,11 @@ internal class RookTest {
     @ValueSource(strings = ["PLAYER_1", "PLAYER_2"])
     fun `Rook은 경로 중간에 기물이 있는 경우 이동할 수 없다`(player: ChessPlayer) {
         val board = ChessBoard(mapOf(
-                ChessPosition.get(ChessCol.D, ChessRow.FOUR) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2),
-                ChessPosition.get(ChessCol.D, ChessRow.TWO) to ChessPieceInGame(MockPiece(), player),
+                ChessPosition.get(ChessRow.FOUR, ChessCol.D) to ChessPieceInGame(ROOK, ChessPlayer.PLAYER_2),
+                ChessPosition.get(ChessRow.TWO, ChessCol.D) to ChessPieceInGame(MockPiece(), player),
         ))
 
-        val result = ROOK.move(ChessPosition.get(ChessCol.D, ChessRow.FOUR), ChessPosition.get(ChessCol.D, ChessRow.ONE))
+        val result = ROOK.move(ChessPosition.get(ChessRow.FOUR, ChessCol.D), ChessPosition.get(ChessRow.ONE, ChessCol.D))
 
         Assertions.assertThat(result.canMoveWith(board)).isFalse()
     }

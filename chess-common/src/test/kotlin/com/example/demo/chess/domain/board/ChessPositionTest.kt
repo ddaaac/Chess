@@ -14,7 +14,7 @@ internal class ChessPositionTest {
     @ParameterizedTest
     @MethodSource("generatePath")
     fun `시작 좌표에서 목표 좌표까지의 경로를 구한다`(start: ChessPosition, end: ChessPosition, direction: PieceDirection, limit: Int, expectedPath: ChessPath?) {
-        val result = start.getPathTo(end, direction, limit)
+        val result = start.findPathTo(end, direction, limit)
         assertThat(result).usingRecursiveComparison()
                 .isEqualTo(expectedPath)
     }
@@ -34,48 +34,48 @@ internal class ChessPositionTest {
     companion object {
         @JvmStatic
         fun generatePath() = listOf(
-                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(A, FOUR), PieceDirection.N, 8, ChessPath(listOf(
-                        ChessPosition.get(A, ONE),
-                        ChessPosition.get(A, TWO),
-                        ChessPosition.get(A, THREE),
-                        ChessPosition.get(A, FOUR),
+                Arguments.of(ChessPosition.get(ONE, A), ChessPosition.get(FOUR, A), PieceDirection.N, 8, ChessPath(listOf(
+                        ChessPosition.get(ONE, A),
+                        ChessPosition.get(TWO, A),
+                        ChessPosition.get(THREE, A),
+                        ChessPosition.get(FOUR, A),
                 ))),
-                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(B, THREE), PieceDirection.NNE, 8, ChessPath(listOf(
-                        ChessPosition.get(A, ONE),
-                        ChessPosition.get(B, THREE),
+                Arguments.of(ChessPosition.get(ONE, A), ChessPosition.get(THREE, B), PieceDirection.NNE, 8, ChessPath(listOf(
+                        ChessPosition.get(ONE, A),
+                        ChessPosition.get(THREE, B),
                 ))),
-                Arguments.of(ChessPosition.get(D, ONE), ChessPosition.get(H, FIVE), PieceDirection.NE, 8, ChessPath(listOf(
-                        ChessPosition.get(D, ONE),
-                        ChessPosition.get(E, TWO),
-                        ChessPosition.get(F, THREE),
-                        ChessPosition.get(G, FOUR),
-                        ChessPosition.get(H, FIVE),
+                Arguments.of(ChessPosition.get(ONE, D), ChessPosition.get(FIVE, H), PieceDirection.NE, 8, ChessPath(listOf(
+                        ChessPosition.get(ONE, D),
+                        ChessPosition.get(TWO, E),
+                        ChessPosition.get(THREE, F),
+                        ChessPosition.get(FOUR, G),
+                        ChessPosition.get(FIVE, H),
                 ))),
-                Arguments.of(ChessPosition.get(D, EIGHT), ChessPosition.get(D, ONE), PieceDirection.S, 7, ChessPath(listOf(
-                        ChessPosition.get(D, EIGHT),
-                        ChessPosition.get(D, SEVEN),
-                        ChessPosition.get(D, SIX),
-                        ChessPosition.get(D, FIVE),
-                        ChessPosition.get(D, FOUR),
-                        ChessPosition.get(D, THREE),
-                        ChessPosition.get(D, TWO),
-                        ChessPosition.get(D, ONE),
+                Arguments.of(ChessPosition.get(EIGHT, D), ChessPosition.get(ONE, D), PieceDirection.S, 7, ChessPath(listOf(
+                        ChessPosition.get(EIGHT, D),
+                        ChessPosition.get(SEVEN, D),
+                        ChessPosition.get(SIX, D),
+                        ChessPosition.get(FIVE, D),
+                        ChessPosition.get(FOUR, D),
+                        ChessPosition.get(THREE, D),
+                        ChessPosition.get(TWO, D),
+                        ChessPosition.get(ONE, D),
                 ))),
-                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(A, THREE), PieceDirection.N, 2, ChessPath(listOf(
-                        ChessPosition.get(A, ONE),
-                        ChessPosition.get(A, TWO),
-                        ChessPosition.get(A, THREE),
+                Arguments.of(ChessPosition.get(ONE, A), ChessPosition.get(THREE, A), PieceDirection.N, 2, ChessPath(listOf(
+                        ChessPosition.get(ONE, A),
+                        ChessPosition.get(TWO, A),
+                        ChessPosition.get(THREE, A),
                 ))),
-                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(A, THREE), PieceDirection.N, 1, emptyPath()),
-                Arguments.of(ChessPosition.get(D, EIGHT), ChessPosition.get(D, ONE), PieceDirection.S, 6, emptyPath()),
-                Arguments.of(ChessPosition.get(D, EIGHT), ChessPosition.get(B, ONE), PieceDirection.S, 8, emptyPath()),
-                Arguments.of(ChessPosition.get(A, ONE), ChessPosition.get(B, THREE), PieceDirection.NE, 8, emptyPath()),
-                Arguments.of(ChessPosition.get(D, ONE), ChessPosition.get(H, FIVE), PieceDirection.NNE, 8, emptyPath()),
+                Arguments.of(ChessPosition.get(ONE, A), ChessPosition.get(THREE, A), PieceDirection.N, 1, null),
+                Arguments.of(ChessPosition.get(EIGHT, D), ChessPosition.get(ONE, D), PieceDirection.S, 6, null),
+                Arguments.of(ChessPosition.get(EIGHT, D), ChessPosition.get(ONE, B), PieceDirection.S, 8, null),
+                Arguments.of(ChessPosition.get(ONE, A), ChessPosition.get(THREE, B), PieceDirection.NE, 8, null),
+                Arguments.of(ChessPosition.get(ONE, D), ChessPosition.get(FIVE, H), PieceDirection.NNE, 8, null),
         )
     }
 
     @Test
     fun `대칭에 있는 좌표를 구한다`() {
-        assertThat(ChessPosition.get(D, ONE).reversed()).isEqualTo(ChessPosition.get(E, EIGHT))
+        assertThat(ChessPosition.get(ONE, D).reversed()).isEqualTo(ChessPosition.get(EIGHT, E))
     }
 }

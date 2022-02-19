@@ -7,7 +7,7 @@ import com.example.demo.chess.domain.piece.type.EMPTY_PIECE
 
 class ChessPieceInGame(private val piece: ChessPiece, private val player: ChessPlayer) {
 
-    fun getMovingResult(start: ChessPosition, end: ChessPosition): PieceMovingResult = piece.move(start, end)
+    fun move(start: ChessPosition, end: ChessPosition): PieceMovingResult = piece.move(start, end)
 
     fun isEmpty() = (piece == EMPTY_PIECE.piece)
 

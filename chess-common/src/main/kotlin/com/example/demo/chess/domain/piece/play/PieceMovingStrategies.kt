@@ -22,7 +22,8 @@ class Moving : DefaultPlayingStrategy() {
 class Attack : DefaultPlayingStrategy() {
 
     override fun canPlay(pieces: List<ChessPieceInGame>): Boolean {
-        val (source, destination) = pieces.run { first() to last() }
+        val source = pieces.first()
+        val destination = pieces.last()
         return source.isOpponentOf(destination)
     }
 }

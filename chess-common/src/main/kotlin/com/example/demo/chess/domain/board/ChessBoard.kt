@@ -8,19 +8,18 @@ class ChessBoard(
         val turn: Int = 1,
 ) {
 
-    private val playerOfTurn: ChessPlayer = if (turn % 2 == 1) {
-        ChessPlayer.PLAYER_1
-    } else {
-        ChessPlayer.PLAYER_2
+    private val playerOfTurn: ChessPlayer = when (turn % 2) {
+        1 -> ChessPlayer.PLAYER_1
+        else -> ChessPlayer.PLAYER_2
     }
 
     fun move(source: ChessPosition, destination: ChessPosition): ChessBoard {
         if (playerOfTurn.isWhite()) {
             return reversed()
-                    .getMovedBoard(source.reversed(), destination.reversed())
+                    .moveIfPossible(source.reversed(), destination.reversed())
                     .reversed()
         }
-        return getMovedBoard(source, destination)
+        return moveIfPossible(source, destination)
     }
 
     fun getPieces(path: ChessPath): List<ChessPieceInGame> {
@@ -34,7 +33,7 @@ class ChessBoard(
         )
     }
 
-    private fun getMovedBoard(source: ChessPosition, destination: ChessPosition): ChessBoard {
+    private fun moveIfPossible(source: ChessPosition, destination: ChessPosition): ChessBoard {
         if (canMove(source, destination)) {
             return ChessBoard(replace(source, destination), turn + 1)
         }
@@ -42,14 +41,14 @@ class ChessBoard(
     }
 
     private fun canMove(source: ChessPosition, destination: ChessPosition): Boolean {
-        return getSourcePiece(source)
-                .getMovingResult(source, destination)
-                .canMoveWith(this)
+        val sourcePiece = getSourcePiece(source)
+        val result = sourcePiece.move(source, destination)
+        return result.canMoveWith(this)
     }
 
     private fun getSourcePiece(source: ChessPosition): ChessPieceInGame {
         return requireNotNull(pieces[source]) { "No piece exist in source position" }
-                .apply { require(isPlayerOf(playerOfTurn)) { "It is not turn of source piece." } }
+                .also { require(it.isPlayerOf(playerOfTurn)) { "It is not turn of source piece." } }
     }
 
     private fun replace(removed: ChessPosition, added: ChessPosition): Map<ChessPosition, ChessPieceInGame> {

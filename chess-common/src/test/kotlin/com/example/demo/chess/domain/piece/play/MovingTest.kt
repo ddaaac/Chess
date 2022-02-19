@@ -30,75 +30,75 @@ internal class MovingTest {
         fun generateJust() = listOf(
                 Arguments.of(
                         ChessPath(listOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE),
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO),
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE))
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A),
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B),
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C))
                         ),
                         mapOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE) to EMPTY_PIECE,
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO) to EMPTY_PIECE,
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C) to EMPTY_PIECE,
                         ),
                         false
                 ),
                 Arguments.of(
                         ChessPath(listOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE),
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO),
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE))
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A),
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B),
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C))
                         ),
                         mapOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE) to mockPiece,
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO) to EMPTY_PIECE,
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A) to mockPiece,
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C) to EMPTY_PIECE,
                         ),
                         true
                 ),
                 Arguments.of(
                         ChessPath(listOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE),
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO),
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE))
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A),
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B),
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C))
                         ),
                         mapOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE) to mockPiece,
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO) to EMPTY_PIECE,
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE) to mockPieceOpponent,
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A) to mockPiece,
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C) to mockPieceOpponent,
                         ),
                         false
                 ),
                 Arguments.of(
                         ChessPath(listOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE),
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO),
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE))
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A),
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B),
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C))
                         ),
                         mapOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE) to mockPiece,
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO) to mockPieceOpponent,
-                                ChessPosition.get(ChessCol.C, ChessRow.THREE) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A) to mockPiece,
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B) to mockPieceOpponent,
+                                ChessPosition.get(ChessRow.THREE, ChessCol.C) to EMPTY_PIECE,
                         ),
                         true
                 ),
                 Arguments.of(
                         ChessPath(listOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE),
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO))
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A),
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B))
                         ),
                         mapOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE) to mockPiece,
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO) to EMPTY_PIECE,
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A) to mockPiece,
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B) to EMPTY_PIECE,
                         ),
                         true
                 ),
                 Arguments.of(
                         ChessPath(listOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE),
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO))
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A),
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B))
                         ),
                         mapOf(
-                                ChessPosition.get(ChessCol.A, ChessRow.ONE) to mockPiece,
-                                ChessPosition.get(ChessCol.B, ChessRow.TWO) to mockPiece,
+                                ChessPosition.get(ChessRow.ONE, ChessCol.A) to mockPiece,
+                                ChessPosition.get(ChessRow.TWO, ChessCol.B) to mockPiece,
                         ),
                         false
                 )

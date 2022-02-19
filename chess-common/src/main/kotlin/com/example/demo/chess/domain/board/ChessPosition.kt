@@ -2,37 +2,35 @@ package com.example.demo.chess.domain.board
 
 import com.example.demo.chess.domain.piece.play.PieceDirection
 
-data class ChessPosition private constructor(val row: ChessRow, val col: ChessCol) {
+class ChessPosition private constructor(val row: ChessRow, val col: ChessCol) {
 
-    fun getPathTo(destination: ChessPosition, direction: PieceDirection, limit: Int = 8): ChessPath? {
+    fun findPathTo(destination: ChessPosition, direction: PieceDirection, limit: Int = NO_LIMIT): ChessPath? {
         val path = mutableListOf<ChessPosition>()
 
         var position: ChessPosition? = this
-        while (position != NOT_EXIST_POSITION && position != destination) {
+        while (position != null && position != destination) {
             path.add(position)
-            position = position.getNextPosition(direction)
+            position = position.findNextPosition(direction)
         }
 
-        if ((position == NOT_EXIST_POSITION) || (path.size > limit)) {
-            return emptyPath()
+        if (position == null || path.size > limit) {
+            return null
         }
         return ChessPath(path.apply { add(position) })
     }
 
-    fun reversed(): ChessPosition = get(col.reversed(), row.reversed())
+    fun reversed(): ChessPosition = get(row.reversed(), col.reversed())
 
-    private fun getNextPosition(direction: PieceDirection): ChessPosition? {
-        return try {
-            val (nextCol, nextRow) = direction.nextOf(col, row)
-            ChessPosition(nextRow, nextCol)
-        } catch (e: IllegalArgumentException) {
-            NOT_EXIST_POSITION
-        }
+    private fun findNextPosition(direction: PieceDirection): ChessPosition? {
+        val (nextRow, nextCol) = direction.nextOf(row, col) ?: return null
+        return ChessPosition(nextRow, nextCol)
     }
 
     companion object {
+
+        private const val NO_LIMIT = 8
+
         private val POSITION_CACHE: Map<Pair<ChessRow, ChessCol>, ChessPosition> = createCache()
-        private val NOT_EXIST_POSITION = null
 
         private fun createCache(): Map<Pair<ChessRow, ChessCol>, ChessPosition> {
             val cache: MutableMap<Pair<ChessRow, ChessCol>, ChessPosition> = mutableMapOf()
@@ -46,9 +44,27 @@ data class ChessPosition private constructor(val row: ChessRow, val col: ChessCo
             return cache
         }
 
-        fun get(col: ChessCol, row: ChessRow): ChessPosition {
+        fun get(row: ChessRow, col: ChessCol): ChessPosition {
             return POSITION_CACHE[row to col]
                     ?: throw IllegalArgumentException("Range of position is between A1 to H8")
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ChessPosition
+
+        if (row != other.row) return false
+        if (col != other.col) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = row.hashCode()
+        result = 31 * result + col.hashCode()
+        return result
     }
 }

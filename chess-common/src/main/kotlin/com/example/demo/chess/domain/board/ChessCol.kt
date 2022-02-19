@@ -10,9 +10,7 @@ enum class ChessCol {
     G,
     H;
 
-    fun next(step: Int): ChessCol =
-            values().getOrNull(ordinal + step)
-                    ?: throw IllegalArgumentException("Range of column is between A to H")
+    fun next(step: Int): ChessCol? = values().getOrNull(ordinal + step)
 
     fun reversed(): ChessCol = values().let {
         it[it.size - ordinal - 1]
